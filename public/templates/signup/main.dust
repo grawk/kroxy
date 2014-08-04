@@ -1,0 +1,16 @@
+{>"layouts/mini"/}
+{<body}
+  <div id="kroxy-signup">
+      {@select key="{country}"}
+          {@eq value="FR"}
+              {>"signup/FR"/}
+          {/eq}
+          {@eq value="DE"}
+              {>"signup/DE"/}
+          {/eq}
+          {@default}
+              {>"signup/US"/}
+          {/default}
+      {/select}
+  </div>
+{/body}
