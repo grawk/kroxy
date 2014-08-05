@@ -1,7 +1,7 @@
 'use strict';
 
 var IndexModel = require('../models/index');
-
+var CommentsModel = require('../models/comments');
 exports.index = function(req, res) {
   var model = new IndexModel();
   res.render('index', model);
@@ -13,18 +13,19 @@ exports.index = function(req, res) {
 // };
 
 exports.comments = function(req, res) {
-  var model = [{
-    'author': 'Jon Bolt',
-    'text': 'Is this thing on?'
-  }];
+  var model = CommentsModel;
   res.json(model);
 };
 
 exports.signup = function(req, res) {
   //give back an appropriate signup form
-  console.log('country', res.locals.context.country, 'language', res.locals.context.language)
-  res.render('signup/main', {
+  var model = {
     'country': res.locals.context.country,
     'language': res.locals.context.language
+  };
+  console.log('country', res.locals.context.country, 'language', res.locals.context.language);
+  res.render('signup/main', model, function(err, data) {
+    console.log('did itz work?', data);
+    res.json({meta: "informationz", data: data});
   });
 };
